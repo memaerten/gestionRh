@@ -56,7 +56,7 @@ public class Employee {
 	@JoinColumn(name="department_id")})
 	private Set <Department> departmentOfEmployee = new HashSet<Department>();
 	
-	private List<Department> listDepartements;
+	//private List<Department> listDepartements;
 	
 	public Employee getChef() {
 		return chef;

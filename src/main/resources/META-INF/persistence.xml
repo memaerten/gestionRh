@@ -8,8 +8,7 @@
         <description>
             Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
         </description>
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <!-- <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>fr.formation.afpa.domain.Employee</class>
         <class>fr.formation.afpa.domain.Department</class>
         <properties>
