@@ -25,7 +25,7 @@ import fr.formation.afpa.domain.Employee;
 public class IndexController {
 	EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unitBd");
 	EntityManager entityManager = entityManagerFactory.createEntityManager();
-	
+
 	EmployeeDaoJpa dao = new EmployeeDaoJpa();
 
 	// injecter service
@@ -38,57 +38,74 @@ public class IndexController {
 		mv.setViewName("employees");
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String getHome() {
 		return "index";
 	}
-	
+
 	@RequestMapping(path = "/updateEmployee", method = RequestMethod.GET)
 	public ModelAndView updateEmployee(@RequestParam Integer empId) {
 		ModelAndView mv = new ModelAndView();
+		dao.begin();
 		Employee e = dao.findById(empId);
+		dao.commit();
 		mv.addObject("employee", e);
 		mv.setViewName("updateEmployee");
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "/contact", method = RequestMethod.GET)
 	public String contactPage() {
 		return "contact";
 	}
-	
+
 	@RequestMapping(path = "/deleteEmployee", method = RequestMethod.GET)
 	public String delete(@RequestParam Integer empId) {
 		dao.begin();
 		dao.deleteById(empId);
 		dao.commit();
-		dao.begin();
 		return "redirect:/employees";
 	}
-	
+
 	@RequestMapping(path = "/about", method = RequestMethod.GET)
 	public String aboutPage() {
 		return "about";
 	}
-	
+
 	@RequestMapping(path = "/addEmployee", method = RequestMethod.POST)
 	public String add(@ModelAttribute Employee employee, @RequestParam("startDateString") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date formdate) {
-		employee.setStartDate(formdate);
-		System.out.println("-----------------");
-		System.out.println(employee);
-		System.out.println(employee.getEmpId());
-		System.out.println("-----------------");
+		if (formdate == null) {
+			Date d = new Date();
+			employee.setStartDate(d);
+		} else {
+			employee.setStartDate(formdate);
+		}
 		dao.begin();
 		dao.save(employee);
+		dao.commit();
 		return "redirect:/employees";
 	}
-	
+
+	@RequestMapping(path = "/updateEmployee", method = RequestMethod.POST)
+	public String update(@ModelAttribute Employee employee, @RequestParam("startDateString") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date formdate) {
+		if (formdate == null) {
+			Date d = new Date();
+			employee.setStartDate(d);
+		} else {
+			employee.setStartDate(formdate);
+		}
+		dao.begin();
+		dao.update(employee);
+		dao.commit();
+		return "redirect:/employees";
+	}
+
 	@RequestMapping(path = "/connexion", method = RequestMethod.GET)
 	public String connexion() {
 		return "connexion";
 	}
-	
+
 	@RequestMapping(path = "/addEmployee", method = RequestMethod.GET)
 	public ModelAndView addEmployee() {
 		ModelAndView mv = new ModelAndView();
@@ -97,7 +114,7 @@ public class IndexController {
 		mv.setViewName("addEmployee");
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "/managers", method = RequestMethod.GET)
 	public ModelAndView getManagers() {
 		ModelAndView mv = new ModelAndView();
@@ -106,7 +123,7 @@ public class IndexController {
 		mv.setViewName("managers");
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "/parametres", method = RequestMethod.GET)
 	public ModelAndView getParametres() {
 		ModelAndView mv = new ModelAndView();

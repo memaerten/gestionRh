@@ -15,10 +15,10 @@
 		<form class="col-sm-6" method="post">
 	
 			<div class="col-auto"><label>Nom :</label></div>
-			<div class="col-auto"><input type="text" name="lastName" class="form-control" value="${employee.lastName}"></div><br />
-			<label>Prénom :</label> <input type="text" name="firstName" class="form-control" value="${employee.firstName}"><br />
+			<div class="col-auto"><input type="text" name="lastName" class="form-control" value="${employee.lastName}" maxlength="20"></div><br />
+			<label>Prénom :</label> <input type="text" name="firstName" class="form-control" value="${employee.firstName}" maxlength="20"><br />
 			<label>Date de début :</label> <input type="date" name="startDateString" class="form-control" value="${employee.startDate}"><br />
-			<label>Titre :</label> <input type="text" name="title" class="form-control" value="${employee.title}"><br />
+			<label>Titre :</label> <input type="text" name="title" class="form-control" value="${employee.title}" maxlength="20"><br />
 			<label>Département :</label>  </label> <div class="dropdown dropdown-inline">
 				<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 					Aucun

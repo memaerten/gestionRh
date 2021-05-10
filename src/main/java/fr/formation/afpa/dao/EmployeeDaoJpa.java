@@ -23,6 +23,9 @@ public class EmployeeDaoJpa implements IEmployeeDaoJpa {
 
 	public void commit() {
 		entitym.getTransaction().commit();
+	}
+	
+	public void close() {
 		entitym.close();
 	}
 
