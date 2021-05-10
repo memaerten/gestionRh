@@ -26,13 +26,32 @@ public class IndexController {
 
 	// injecter service
 
-	@RequestMapping(path = "/", method = RequestMethod.GET)
-	public ModelAndView getHome() {
+	@RequestMapping(path = "/employees", method = RequestMethod.GET)
+	public ModelAndView getEmployees() {
 		ModelAndView mv = new ModelAndView();
 		List <Employee> liste = dao.findAll();
 		mv.addObject("liste", liste);
-		mv.setViewName("index");
+		mv.setViewName("employees");
 		return mv;
+	}
+	
+	@RequestMapping(path = "/", method = RequestMethod.GET)
+	public String getHome() {
+		return "index";
+	}
+	
+	@RequestMapping(path = "/contact", method = RequestMethod.GET)
+	public String contactPage() {
+		return "contact";
+	}
+	
+	@RequestMapping(path = "/about", method = RequestMethod.GET)
+	public String aboutPage() {
+		return "about";
+	}
+	@RequestMapping(path = "/addEmployee", method = RequestMethod.GET)
+	public String addEmployee() {
+		return "addEmployee";
 	}
 
 }
