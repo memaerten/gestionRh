@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 public class Employee {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "emp_id",unique = true, nullable = false)
 	private Integer empId;
 	
@@ -50,11 +50,11 @@ public class Employee {
 	@JoinColumn(name= "superior_emp_id")
 	private Employee chef;
 	
-	@ManyToMany
-	@JoinTable(name="employees_has_department", joinColumns = {
-	@JoinColumn(name="employee_id") },inverseJoinColumns = {
-	@JoinColumn(name="department_id")})
-	private Set <Department> departmentOfEmployee = new HashSet<Department>();
+//	@ManyToMany
+//	@JoinTable(name="employees_has_department", joinColumns = {
+//	@JoinColumn(name="employee_id") },inverseJoinColumns = {
+//	@JoinColumn(name="department_id")})
+//	private Set <Department> departmentOfEmployee = new HashSet<Department>();
 	
 	//private List<Department> listDepartements;
 	

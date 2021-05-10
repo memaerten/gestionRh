@@ -1,14 +1,18 @@
 package fr.formation.afpa.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.formation.afpa.dao.EmployeeDaoJpa;
@@ -40,14 +44,44 @@ public class IndexController {
 		return "index";
 	}
 	
+	@RequestMapping(path = "/updateEmployee", method = RequestMethod.GET)
+	public ModelAndView updateEmployee(@RequestParam Integer empId) {
+		ModelAndView mv = new ModelAndView();
+		Employee e = dao.findById(empId);
+		mv.addObject("employee", e);
+		mv.setViewName("updateEmployee");
+		return mv;
+	}
+	
 	@RequestMapping(path = "/contact", method = RequestMethod.GET)
 	public String contactPage() {
 		return "contact";
 	}
 	
+	@RequestMapping(path = "/deleteEmployee", method = RequestMethod.GET)
+	public String delete(@RequestParam Integer empId) {
+		dao.begin();
+		dao.deleteById(empId);
+		dao.commit();
+		dao.begin();
+		return "redirect:/employees";
+	}
+	
 	@RequestMapping(path = "/about", method = RequestMethod.GET)
 	public String aboutPage() {
 		return "about";
+	}
+	
+	@RequestMapping(path = "/addEmployee", method = RequestMethod.POST)
+	public String add(@ModelAttribute Employee employee, @RequestParam("startDateString") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date formdate) {
+		employee.setStartDate(formdate);
+		System.out.println("-----------------");
+		System.out.println(employee);
+		System.out.println(employee.getEmpId());
+		System.out.println("-----------------");
+		dao.begin();
+		dao.save(employee);
+		return "redirect:/employees";
 	}
 	
 	@RequestMapping(path = "/connexion", method = RequestMethod.GET)

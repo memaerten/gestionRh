@@ -11,14 +11,14 @@
 <body>
 <%@ include file="h.jsp"%>
 
-<div class="container-sm"><h1>Ajout Employee</h1>
+<div class="container-sm"><h1>Mise à jour Employee</h1>
 		<form class="col-sm-6" method="post">
 	
 			<div class="col-auto"><label>Nom :</label></div>
-			<div class="col-auto"><input type="text" name="lastName" class="form-control"></div><br />
-			<label>Prénom :</label> <input type="text" name="firstName" class="form-control"><br />
-			<label>Date de début :</label> <input type="date" name="startDateString" class="form-control"><br />
-			<label>Titre :</label> <input type="text" name="title" class="form-control"><br />
+			<div class="col-auto"><input type="text" name="lastName" class="form-control" value="${employee.lastName}"></div><br />
+			<label>Prénom :</label> <input type="text" name="firstName" class="form-control" value="${employee.firstName}"><br />
+			<label>Date de début :</label> <input type="date" name="startDateString" class="form-control" value="${employee.startDate}"><br />
+			<label>Titre :</label> <input type="text" name="title" class="form-control" value="${employee.title}"><br />
 			<label>Département :</label>  </label> <div class="dropdown dropdown-inline">
 				<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 					Aucun
