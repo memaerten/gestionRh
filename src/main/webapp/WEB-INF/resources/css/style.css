@@ -1,0 +1,48 @@
+body {
+	background-image: url("background.jpg");
+}
+
+.container-sm {
+	margin-top: 20px;
+	background-color: white;
+	padding: 1%;
+	box-shadow: 1px 1px 10px silver;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+	color: white;
+}
+
+.connexion {
+	
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.navbar ul {
+	margin: auto;
+}
+
+.main {
+	width: 100%;
+	height: 500px;
+}
+
+.footer {
+	width: 100%;
+}
+
+#dropdown {
+	display: none;
+}
+
+#delete {
+	display: none;
+}
+
+.navbar-nav .nav-link:hover {
+/*background-color: red;*/
+text-shadow: 1px 1px 1px black;
+width: auto;
+height: auto;
+}

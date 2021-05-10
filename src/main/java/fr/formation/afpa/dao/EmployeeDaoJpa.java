@@ -34,7 +34,6 @@ public class EmployeeDaoJpa implements IEmployeeDaoJpa {
 	@Override
 	public List<Employee> findAll() {
 		return entitym.createQuery("select emp from Employee emp").getResultList();
-
 	}
 
 	@Override
