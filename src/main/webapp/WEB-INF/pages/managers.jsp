@@ -11,7 +11,7 @@
 <%@ include file="h.jsp"%>
 <body>
 	<div class="container-sm">
-		<h2>Employees</h2>
+		<h2>Managers</h2>
 		<div class="table-responsive">
 		<table class="table table-striped table-hover">
 		<thead>
