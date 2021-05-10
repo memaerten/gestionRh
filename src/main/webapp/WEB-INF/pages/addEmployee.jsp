@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,9 +33,9 @@
 					Aucun
 				</button>
 				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Manager 1</a></li>
-					<li><a class="dropdown-item" href="#">Manager 2</a></li>
-					<li><a class="dropdown-item" href="#">Manager 3</a></li>
+				<c:forEach items="${managers}" var="employee">
+					<li><a class="dropdown-item">${employee.firstName} ${employee.lastName}</a></li>
+					</c:forEach>
 				</ul>
 			</div>
 <br />

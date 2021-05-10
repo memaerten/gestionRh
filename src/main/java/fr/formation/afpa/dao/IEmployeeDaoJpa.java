@@ -9,7 +9,6 @@ public interface IEmployeeDaoJpa {
 	// Read
 	Employee findById(Integer id);
 	List <Employee> findAll();
-	List <Employee> findManagers();
 
 	// Create
 	Integer save(Employee e);

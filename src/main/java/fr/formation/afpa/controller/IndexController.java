@@ -49,9 +49,37 @@ public class IndexController {
 	public String aboutPage() {
 		return "about";
 	}
+	
+	@RequestMapping(path = "/connexion", method = RequestMethod.GET)
+	public String connexion() {
+		return "connexion";
+	}
+	
 	@RequestMapping(path = "/addEmployee", method = RequestMethod.GET)
-	public String addEmployee() {
-		return "addEmployee";
+	public ModelAndView addEmployee() {
+		ModelAndView mv = new ModelAndView();
+		List <Employee> managers = dao.findAll();
+		mv.addObject("managers", managers);
+		mv.setViewName("addEmployee");
+		return mv;
+	}
+	
+	@RequestMapping(path = "/managers", method = RequestMethod.GET)
+	public ModelAndView getManagers() {
+		ModelAndView mv = new ModelAndView();
+		List <Employee> liste = dao.findAll();
+		mv.addObject("liste", liste);
+		mv.setViewName("managers");
+		return mv;
+	}
+	
+	@RequestMapping(path = "/parametres", method = RequestMethod.GET)
+	public ModelAndView getParametres() {
+		ModelAndView mv = new ModelAndView();
+		List <Employee> liste = dao.findAll();
+		mv.addObject("liste", liste);
+		mv.setViewName("parametres");
+		return mv;
 	}
 
 }
