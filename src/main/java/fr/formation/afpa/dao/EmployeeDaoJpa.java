@@ -23,6 +23,9 @@ public class EmployeeDaoJpa implements IEmployeeDaoJpa {
 
 	public void commit() {
 		entitym.getTransaction().commit();
+	}
+	
+	public void close() {
 		entitym.close();
 	}
 
@@ -39,19 +42,25 @@ public class EmployeeDaoJpa implements IEmployeeDaoJpa {
 
 	@Override
 	public Integer save(Employee e) {
+		begin();
 		entitym.persist(e);
+		commit();
 		return e.getEmpId();
 	}
 
 	@Override
-	public Employee update(Employee e) {
-		return entitym.merge(e);
+	public void update(Employee e) {
+		begin();
+		entitym.merge(e);
+		commit();
 
 	}
 
 	@Override
 	public void delete(Employee e) {
+		begin();
 		entitym.remove(e);
+		commit();
 
 	}
 
@@ -60,6 +69,14 @@ public class EmployeeDaoJpa implements IEmployeeDaoJpa {
 		Employee e = findById(id);
 		delete(e);
 
+	}
+	
+	public List<Employee> managersList() {
+		return entitym.createQuery("select distinct emp.chef from Employee emp").getResultList();
+	}
+	
+	public List<Employee> employeesManaged(Integer i) {
+		return entitym.createQuery("select emp from Employee emp where emp.chef.empId =" + i).getResultList();
 	}
 
 }
