@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.formation.afpa.dao.EmployeeDaoJpa;
@@ -30,13 +31,28 @@ public class IndexController {
 
 	// injecter service
 
+//	private boolean isAuthenticated() {
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		if (authentication == null || AnonymousAuthenticationToken.class.
+//				isAssignableFrom(authentication.getClass())) {
+//			return false;
+//		}
+//		return authentication.isAuthenticated();
+//	}
+
 	@RequestMapping(path = "/employees", method = RequestMethod.GET)
 	public ModelAndView getEmployees() {
 		ModelAndView mv = new ModelAndView();
-		List <Employee> liste = dao.findAll();
-		mv.addObject("liste", liste);
-		mv.setViewName("employees");
-		return mv;
+		//if(isAuthenticated()) {
+			List <Employee> liste = dao.findAll();
+			mv.addObject("liste", liste);
+			mv.setViewName("employees");
+			return mv;
+//		} else {
+//			mv.setViewName("redirect:/connexion");
+//			return mv;
+//		}
+
 	}
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
@@ -47,9 +63,7 @@ public class IndexController {
 	@RequestMapping(path = "/updateEmployee", method = RequestMethod.GET)
 	public ModelAndView updateEmployee(@RequestParam Integer empId) {
 		ModelAndView mv = new ModelAndView();
-		dao.begin();
-		Employee e = dao.findById(empId);
-		dao.commit();
+		Employee e = (Employee) dao.findById(empId);
 		mv.addObject("employee", e);
 		mv.setViewName("updateEmployee");
 		return mv;
@@ -62,9 +76,7 @@ public class IndexController {
 
 	@RequestMapping(path = "/deleteEmployee", method = RequestMethod.GET)
 	public String delete(@RequestParam Integer empId) {
-		dao.begin();
 		dao.deleteById(empId);
-		dao.commit();
 		return "redirect:/employees";
 	}
 
@@ -81,9 +93,7 @@ public class IndexController {
 		} else {
 			employee.setStartDate(formdate);
 		}
-		dao.begin();
 		dao.save(employee);
-		dao.commit();
 		return "redirect:/employees";
 	}
 
@@ -95,9 +105,7 @@ public class IndexController {
 		} else {
 			employee.setStartDate(formdate);
 		}
-		dao.begin();
 		dao.update(employee);
-		dao.commit();
 		return "redirect:/employees";
 	}
 
@@ -131,6 +139,25 @@ public class IndexController {
 		mv.addObject("liste", liste);
 		mv.setViewName("parametres");
 		return mv;
+	}
+
+	@RequestMapping(path = "/connexion", method = RequestMethod.POST)
+	public String connexionFormulaire(@RequestParam ("username") String name, @RequestParam ("password") String pwd) {
+		ModelAndView mv = new ModelAndView();
+		String username = "root";
+		String password = "123456";
+		if(name.equals(username) && pwd.equals(password)) {
+
+			return "redirect:/employees";
+		} else {
+			return "connexion";
+		}
+	}
+
+	@RequestMapping(path = "/deconnexion", method = RequestMethod.GET)
+	public String deconnexion(SessionStatus status) {
+		status.setComplete();
+		return "index";	
 	}
 
 }

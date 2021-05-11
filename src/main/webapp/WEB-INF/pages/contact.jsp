@@ -17,5 +17,6 @@
 	<input type="submit" class="btn btn-primary" />
 </div>
 </form></div>
+<%@ include file="f.jsp"%>
 </body>
 </html>

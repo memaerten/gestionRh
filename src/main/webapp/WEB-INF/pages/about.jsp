@@ -27,6 +27,6 @@
 <p>Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla </p>
 <p>Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla </p>	
 </div>
-
+<%@ include file="f.jsp"%>
 </body>
 </html>
