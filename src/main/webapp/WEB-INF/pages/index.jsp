@@ -10,5 +10,6 @@
 <%@ include file="h.jsp"%>
 <div class="container-sm"><h1>Bienvenue</h1>
 <p>Bienvenue sur l'outil de gestion des employés</p></div>
+<%@ include file="f.jsp"%>
 </body>
 </html>

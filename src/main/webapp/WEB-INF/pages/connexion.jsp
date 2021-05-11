@@ -9,7 +9,7 @@
 <body>
 <%@ include file="h.jsp"%>
 <div class="container-sm connexion"><h1>Connexion</h1>
-<form>
+<form method="post">
 	<div class="col-sm-6">
 	<label>Nom :</label> <input type="text" name="username" class="form-control"><br />
 
@@ -17,5 +17,6 @@
 	<input type="submit" class="btn btn-primary" />
 	</div>
 </form></div>
+<%@ include file="f.jsp"%>
 </body>
 </html>

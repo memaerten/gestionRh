@@ -43,6 +43,7 @@
 		</div>
 		<a href="addEmployee"><button class="btn btn-primary">Ajouter</button></a>
 	</div>
+	<%@ include file="f.jsp"%>
 </body>
 </html>
 <script>
