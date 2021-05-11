@@ -63,8 +63,10 @@ public class IndexController {
 	@RequestMapping(path = "/updateEmployee", method = RequestMethod.GET)
 	public ModelAndView updateEmployee(@RequestParam Integer empId) {
 		ModelAndView mv = new ModelAndView();
-		Employee e = (Employee) dao.findById(empId);
+		Employee e = dao.findById(empId);
 		mv.addObject("employee", e);
+		List <Employee> managers = dao.managersList();
+		mv.addObject("managers", managers);
 		mv.setViewName("updateEmployee");
 		return mv;
 	}
@@ -86,10 +88,11 @@ public class IndexController {
 	}
 
 	@RequestMapping(path = "/addEmployee", method = RequestMethod.POST)
-	public String add(@ModelAttribute Employee employee, @RequestParam("startDateString") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date formdate) {
+	public String add(@ModelAttribute Employee employee, @RequestParam("startDateString") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date formdate, @RequestParam("superiorEmpId") String superiorEmpId) {
 		if (formdate == null) {
 			Date d = new Date();
 			employee.setStartDate(d);
+			employee.setChef(dao.findById(Integer.parseInt(superiorEmpId)));
 		} else {
 			employee.setStartDate(formdate);
 		}
@@ -98,13 +101,14 @@ public class IndexController {
 	}
 
 	@RequestMapping(path = "/updateEmployee", method = RequestMethod.POST)
-	public String update(@ModelAttribute Employee employee, @RequestParam("startDateString") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date formdate) {
+	public String update(@ModelAttribute Employee employee, @RequestParam("startDateString") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date formdate, @RequestParam("superiorEmpId") String superiorEmpId) {
 		if (formdate == null) {
 			Date d = new Date();
 			employee.setStartDate(d);
 		} else {
 			employee.setStartDate(formdate);
 		}
+		employee.setChef(dao.findById(Integer.parseInt(superiorEmpId)));
 		dao.update(employee);
 		return "redirect:/employees";
 	}
@@ -117,7 +121,7 @@ public class IndexController {
 	@RequestMapping(path = "/addEmployee", method = RequestMethod.GET)
 	public ModelAndView addEmployee() {
 		ModelAndView mv = new ModelAndView();
-		List <Employee> managers = dao.findAll();
+		List <Employee> managers = dao.managersList();
 		mv.addObject("managers", managers);
 		mv.setViewName("addEmployee");
 		return mv;
@@ -126,7 +130,7 @@ public class IndexController {
 	@RequestMapping(path = "/managers", method = RequestMethod.GET)
 	public ModelAndView getManagers() {
 		ModelAndView mv = new ModelAndView();
-		List <Employee> liste = dao.findAll();
+		List <Employee> liste = dao.managersList();
 		mv.addObject("liste", liste);
 		mv.setViewName("managers");
 		return mv;

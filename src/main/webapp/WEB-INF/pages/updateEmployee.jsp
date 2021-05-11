@@ -29,16 +29,14 @@
 					<li><a class="dropdown-item" href="#">Branche 3</a></li>
 				</ul>
 			</div>
-			<label>Manager : </label> <div class="dropdown dropdown-inline">
-				<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-					Aucun
-				</button>
-				<ul class="dropdown-menu">
-				<c:forEach items="${managers}" var="employee">
-					<li><a class="dropdown-item">${employee.firstName} ${employee.lastName}</a></li>
-					</c:forEach>
-				</ul>
-			</div>
+			<label>Manager : </label> <div class="form-group">
+  <select class="form-control" name="superiorEmpId">
+  <option value="null">Aucun</option>
+  <c:forEach items="${managers}" var="employee">
+    <option value="${employee.empId}">${employee.firstName} ${employee.lastName}</option>
+    </c:forEach>
+  </select>
+</div> 
 <br />
 <div class="form-check">
 	<input type="submit" class="btn btn-primary" />

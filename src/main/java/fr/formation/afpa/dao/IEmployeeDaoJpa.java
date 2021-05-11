@@ -14,7 +14,7 @@ public interface IEmployeeDaoJpa {
 	Integer save(Employee e);
 
 	// Update
-	Employee update(Employee e);
+	void update(Employee e);
 	
 	// Delete
 	void delete(Employee e);
