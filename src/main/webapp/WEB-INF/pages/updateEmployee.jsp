@@ -14,11 +14,11 @@
 <div class="container-sm"><h1>Mise à jour Employee</h1>
 		<form class="col-sm-6" method="post">
 	
-			<div class="col-auto"><label>Nom :</label></div>
+			<div class="col-auto"><label><spring:message code="global.lastname"></spring:message> :</label></div>
 			<div class="col-auto"><input type="text" name="lastName" class="form-control" value="${employee.lastName}" maxlength="20"></div><br />
-			<label>Prénom :</label> <input type="text" name="firstName" class="form-control" value="${employee.firstName}" maxlength="20"><br />
-			<label>Date de début :</label> <input type="date" name="startDateString" class="form-control" value="${employee.startDate}"><br />
-			<label>Titre :</label> <input type="text" name="title" class="form-control" value="${employee.title}" maxlength="20"><br />
+			<label><spring:message code="global.firstname"></spring:message> :</label> <input type="text" name="firstName" class="form-control" value="${employee.firstName}" maxlength="20"><br />
+			<label><spring:message code="global.startdate"></spring:message> :</label> <input type="date" name="startDateString" class="form-control" value="${employee.startDate}"><br />
+			<label><spring:message code="global.title"></spring:message> :</label> <input type="text" name="title" class="form-control" value="${employee.title}" maxlength="20"><br />
 			<label>Département :</label>  </label> <div class="dropdown dropdown-inline">
 				<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
 					Aucun
@@ -30,10 +30,13 @@
 				</ul>
 			</div>
 			<label>Manager : </label> <div class="form-group">
-  <select class="form-control" name="superiorEmpId">
-  <option value="null">Aucun</option>
-  <c:forEach items="${managers}" var="employee">
-    <option value="${employee.empId}">${employee.firstName} ${employee.lastName}</option>
+  <select class="form-select" name="superiorEmpId">
+  <option value="null"><spring:message code="global.nonemanager"></spring:message> </option>
+  <c:forEach items="${managers}" var="emp">
+  <c:choose>
+  <c:when test="${employee.chef.empId == emp.empId}"><option value="${employee.empId}" selected="selected">${emp.firstName} ${emp.lastName}</option></c:when>
+  <c:when test="${employee.chef.empId != emp.empId}"><option value="${employee.empId}">${emp.firstName} ${emp.lastName}</option></c:when>
+  </c:choose>
     </c:forEach>
   </select>
 </div> 
