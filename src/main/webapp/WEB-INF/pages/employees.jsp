@@ -16,12 +16,12 @@
 		<table class="table table-striped table-hover">
 		<thead>
 			<tr>
-				<th scope="col">Nom</th>
-				<th scope="col">Prénom</th>
-				<th scope="col">Date de début</th>
-				<th scope="col">Titre</th>
-				<th scope="col">Editer</th>
-				<th scope="col">Supprimer</th>
+				<th scope="col"><spring:message code="global.lastname"></spring:message></th>
+				<th scope="col"><spring:message code="global.firstname"></spring:message> </th>
+				<th scope="col"><spring:message code="global.startdate"></spring:message></th>
+				<th scope="col"><spring:message code="global.title"></spring:message></th>
+				<th scope="col"><spring:message code="global.edit"></spring:message></th>
+				<th scope="col"><spring:message code="global.delete"></spring:message></th>
 			</tr>
 			</thead>
 			<c:forEach items="${liste}" var="employee">
@@ -41,7 +41,7 @@
 			</c:forEach>
 		</table>
 		</div>
-		<a href="addEmployee"><button class="btn btn-primary">Ajouter</button></a>
+		<a href="addEmployee"><button class="btn btn-primary"><spring:message code="global.add"></spring:message></button></a>
 	</div>
 	<%@ include file="f.jsp"%>
 </body>

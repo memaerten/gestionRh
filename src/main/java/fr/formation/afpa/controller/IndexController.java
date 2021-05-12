@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fr.formation.afpa.dao.EmployeeDaoJpa;
 import fr.formation.afpa.domain.Employee;
+import fr.formation.afpa.service.EmployeeService;
 
 
 
@@ -30,7 +31,7 @@ public class IndexController {
 	EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unitBd");
 	EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-	EmployeeDaoJpa dao = new EmployeeDaoJpa();
+	EmployeeService dao = new EmployeeService();
 	boolean isAuthenticated = false;
 
 	// injecter service

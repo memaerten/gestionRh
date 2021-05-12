@@ -30,13 +30,13 @@
 					<li class="nav-item"><a class="nav-link" href="about"><spring:message code="global.about"></spring:message> </a></li>
 					<li class="nav-item"><a class="nav-link" href="managers"><spring:message code="global.managers"></spring:message> </a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="employees">Employee</a>
+					<li class="nav-item"><a class="nav-link" href="employees"><spring:message code="global.employees"></spring:message></a>
 					</li>
 					<li class="nav-item"><a class="nav-link"
-						href="parametres.html">Paramètres</a></li>
+						href="parametres.html"><spring:message code="global.settings"></spring:message> </a></li>
 				</ul>
 				<ul class="navbar-nav me-auto mb-2 mb-md-0">
-					<li><a href="deconnexion" class="nav-item nav-link">Connexion</a>
+					<li><a href="deconnexion" class="nav-item nav-link"><spring:message code="global.login"></spring:message> </a>
 					</li>
 					<li><a href="${pageContext.request.contextPath}?lang=fr" class="nav-item nav-link">Français</a>
 					</li>

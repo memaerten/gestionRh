@@ -14,7 +14,7 @@
 <div class="container-sm"><h1>Ajout Employee</h1>
 		<form class="col-sm-6" method="post">
 	
-			<div class="col-auto"><label>Nom :</label></div>
+			<div class="col-auto"><label><spring:message code="global.lastname"></spring:message> :</label></div>
 			<div class="col-auto"><input type="text" name="lastName" class="form-control" maxlength="20"></div><br />
 			<label>Prénom :</label> <input type="text" name="firstName" class="form-control" maxlength="20"><br />
 			<label>Date de début :</label> <input type="date" name="startDateString" class="form-control"><br />
@@ -31,8 +31,8 @@
 			</div>
 			<label>Manager : </label> 
 			 <div class="form-group">
-  <select class="form-control" name="superiorEmpId">
-  <option value="null">Aucun</option>
+  <select class="form-select" name="superiorEmpId">
+  <option value="null"><spring:message code="global.nonemanager"></spring:message></option>
   <c:forEach items="${managers}" var="employee">
     <option value="${employee.empId}">${employee.firstName} ${employee.lastName}</option>
     </c:forEach>
