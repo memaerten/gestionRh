@@ -41,11 +41,10 @@ public class EmployeeDaoJpa implements IEmployeeDaoJpa {
 	}
 
 	@Override
-	public Integer save(Employee e) {
+	public void save(Employee e) {
 		begin();
 		entitym.persist(e);
 		commit();
-		return e.getEmpId();
 	}
 
 	@Override
@@ -77,6 +76,10 @@ public class EmployeeDaoJpa implements IEmployeeDaoJpa {
 	
 	public List<Employee> employeesManaged(Integer i) {
 		return entitym.createQuery("select emp from Employee emp where emp.chef.empId =" + i).getResultList();
+	}
+	
+	public List<Employee> employeesNoManager() {
+		return entitym.createQuery("select emp from Employee emp where emp.chef is null and emp.empId != 1").getResultList();
 	}
 
 }

@@ -166,7 +166,7 @@ public class IndexController {
 	public ModelAndView getParametres(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		if (session.getAttribute("username") != null) {
-			List <Employee> liste = dao.findAll();
+			List <Employee> liste = dao.employeesNoManager();
 			mv.addObject("liste", liste);
 			mv.setViewName("parametres");
 		} else {
