@@ -24,7 +24,7 @@ public class ApplicationInitializer implements WebApplicationInitializer {
 		
 		FilterRegistration.Dynamic fr = container.addFilter("encodingFilter", CharacterEncodingFilter.class);
 		fr.setInitParameter("encoding", "UTF-8");
-		//fr.setInitParameter("forceEncoding", null);
+//		fr.setInitParameter("forceEncoding", "true");
 		fr.addMappingForUrlPatterns(null, true, "/");
 	}
 

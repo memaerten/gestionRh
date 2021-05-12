@@ -16,7 +16,9 @@
 	<label>Mot de passe :</label> <input type="password" name="password" class="form-control"><br />
 	<input type="submit" class="btn btn-primary" />
 	</div>
-</form></div>
+</form>
+<br>
+${error}</div>
 <%@ include file="f.jsp"%>
 </body>
 </html>
