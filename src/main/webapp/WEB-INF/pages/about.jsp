@@ -9,7 +9,7 @@
 <body>
 <%@ include file="h.jsp"%>
 
-<div class="container-sm"><h1>Qui sommes-nous ?</h1>
+<div class="container-sm"><h1><spring:message code="global.about"></spring:message></h1>
 <p>Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla </p>
 <p>Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla </p>
 <p>Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla Texte de "qui sommes-nous" blabla </p>

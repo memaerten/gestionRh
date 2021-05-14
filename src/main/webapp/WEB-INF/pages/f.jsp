@@ -6,6 +6,6 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<footer class="footer"><div class="container-sm">2021 - Mélissa MAERTEN</div></footer>
+	<footer class="footer"><div class="container-fluid">2021 - Mélissa MAERTEN</div></footer>
 </body>
 </html>

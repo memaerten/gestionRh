@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,19 +17,17 @@
 	
 			<div class="col-auto"><label><spring:message code="global.lastname"></spring:message> :</label></div>
 			<div class="col-auto"><input type="text" name="lastName" class="form-control" maxlength="20"></div><br />
-			<label>Prénom :</label> <input type="text" name="firstName" class="form-control" maxlength="20"><br />
-			<label>Date de début :</label> <input type="date" name="startDateString" class="form-control"><br />
-			<label>Titre :</label> <input type="text" name="title" class="form-control" maxlength="20"><br />
-			<label>Département :</label>  </label> <div class="dropdown dropdown-inline">
-				<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-					Aucun
-				</button>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Branche 1</a></li>
-					<li><a class="dropdown-item" href="#">Branche 2</a></li>
-					<li><a class="dropdown-item" href="#">Branche 3</a></li>
-				</ul>
-			</div>
+			<label><spring:message code="global.firstname"></spring:message> :</label> <input type="text" name="firstName" class="form-control" maxlength="20"><br />
+			<label><spring:message code="global.startdate"></spring:message> :</label> <input type="date" name="startDateString" class="form-control"><br />
+			<label><spring:message code="global.title"></spring:message> :</label> <input type="text" name="title" class="form-control" maxlength="20"><br />
+			<label><spring:message code="global.department"></spring:message> :</label>  </label> <div class="form-group">
+  <select class="form-select form-control" name="depId">
+   <option value="null"><spring:message code="global.nonemanager"></spring:message></option>
+  <c:forEach items="${departments}" var="department">
+    <option value="${department.deptId}">${department.name}</option>
+    </c:forEach>
+  
+  </select></div>
 			<label>Manager : </label> 
 			 <div class="form-group">
   <select class="form-select" name="superiorEmpId">
@@ -42,7 +41,8 @@
 <div class="form-check">
 	<input type="submit" class="btn btn-primary" />
 </div>
-</form></div>
+</form>
+</div>
 <%@ include file="f.jsp"%>
 </body>
 </html>

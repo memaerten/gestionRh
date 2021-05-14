@@ -12,6 +12,7 @@
 <body>
 	<div class="container-sm">
 		<h2>Paramètres</h2>
+		Liste d'Employees sans Managers
 		<div class="table-responsive">
 		<table class="table table-striped table-hover">
 		<thead>
@@ -20,8 +21,7 @@
 				<th scope="col">Prénom</th>
 				<th scope="col">Date de début</th>
 				<th scope="col">Titre</th>
-				<th scope="col">Editer</th>
-				<th scope="col">Supprimer</th>
+				<th scope="col">Département</th>
 			</tr>
 			</thead>
 			<c:forEach items="${liste}" var="employee">
@@ -30,8 +30,7 @@
 					<td>${employee.firstName}</td>
 					<td>${employee.startDate}</td>
 					<td>${employee.title}</td>
-					<td></td>
-					<td></td>
+					<td>${employee.department.name}</td>
 				</tr>
 			</c:forEach>
 		</table>

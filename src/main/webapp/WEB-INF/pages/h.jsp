@@ -36,11 +36,11 @@
 						href="parametres.html"><spring:message code="global.settings"></spring:message> </a></li>
 				</ul>
 				<ul class="navbar-nav me-auto mb-2 mb-md-0">
-					<li><a href="deconnexion" class="nav-item nav-link"><spring:message code="global.login"></spring:message> </a>
+					<li><a href="connexion" class="nav-item nav-link"><spring:message code="global.login"></spring:message> </a>
 					</li>
-					<li><a href="${pageContext.request.contextPath}?lang=fr" class="nav-item nav-link">Français</a>
+					<li><a href="?lang=fr" class="nav-item nav-link">Français</a>
 					</li>
-					<li><a href="${pageContext.request.contextPath}?lang=en" class="nav-item nav-link">English</a>
+					<li><a href="?lang=en" class="nav-item nav-link">English</a>
 					</li>
 				</ul>
 			</div>

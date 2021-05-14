@@ -29,7 +29,9 @@ body {
 }
 
 .footer {
-	width: 100%;
+	background-color: white !important;
+	position:fixed;
+	bottom: 0;
 }
 
 #dropdown {
@@ -38,6 +40,10 @@ body {
 
 #delete {
 	display: none;
+}
+
+.container-sm {
+	position: relative;
 }
 
 .navbar-nav .nav-link:hover {

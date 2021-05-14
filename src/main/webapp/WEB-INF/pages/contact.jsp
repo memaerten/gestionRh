@@ -8,7 +8,7 @@
 </head>
 <body>
 <%@ include file="h.jsp"%>
-<div class="container-sm"><h1>Contact</h1>
+<div class="container-sm"><h1><spring:message code="global.contact"></spring:message></h1>
 	<div class="col-sm-6">
 <form>
 	
