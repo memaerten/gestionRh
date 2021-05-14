@@ -31,6 +31,7 @@
 						<th scope="col">Prénom</th>
 						<th scope="col">Date de début</th>
 						<th scope="col">Titre</th>
+						<th scope="col">Département</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -48,6 +49,7 @@
 							<td>${employee.firstName}</td>
 							<td>${employee.startDate}</td>
 							<td>${employee.title}</td>
+							<td>${employee.department.name}</td>
 						</tr>
 				</tbody>
 				<tbody id="group-of-rows-${employee.empId}"

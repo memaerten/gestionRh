@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import fr.formation.afpa.dao.DepartmentDaoJpa;
 import fr.formation.afpa.dao.EmployeeDaoJpa;
+import fr.formation.afpa.domain.Department;
 import fr.formation.afpa.domain.Employee;
 import fr.formation.afpa.service.EmployeeService;
 
@@ -32,6 +34,8 @@ public class IndexController {
 	EntityManager entityManager = entityManagerFactory.createEntityManager();
 
 	EmployeeService dao = new EmployeeService();
+	DepartmentDaoJpa depdao = new DepartmentDaoJpa();
+	
 	boolean isAuthenticated = false;
 
 	// injecter service
@@ -70,7 +74,9 @@ public class IndexController {
 			Employee e = dao.findById(empId);
 			mv.addObject("employee", e);
 			List <Employee> managers = dao.managersList();
+			List<Department> departments = depdao.findAll();
 			mv.addObject("managers", managers);
+			mv.addObject("departments", departments);
 			mv.setViewName("updateEmployee");
 			return mv;
 		} else {
@@ -100,14 +106,23 @@ public class IndexController {
 	}
 
 	@RequestMapping(path = "/addEmployee", method = RequestMethod.POST)
-	public String add(@ModelAttribute Employee employee, @RequestParam("startDateString") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date formdate, @RequestParam("superiorEmpId") String superiorEmpId, HttpSession session) {
+	public String add(@ModelAttribute Employee employee, @RequestParam("startDateString") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date formdate, @RequestParam("superiorEmpId") String superiorEmpId, @RequestParam("depId") String departmentId, HttpSession session) {
 		if (session.getAttribute("username") != null) {
 			if (formdate == null) {
 				Date d = new Date();
 				employee.setStartDate(d);
-				employee.setChef(dao.findById(Integer.parseInt(superiorEmpId)));
 			} else {
 				employee.setStartDate(formdate);
+			}
+			if (superiorEmpId.equals("null")) {
+				employee.setChef(null);	
+			} else {
+				employee.setChef(dao.findById(Integer.parseInt(superiorEmpId)));
+			}
+			if (departmentId.equals("null")) {
+				employee.setDepartment(null);	
+			} else {
+				employee.setDepartment(depdao.findById(Integer.parseInt(departmentId)));
 			}
 			dao.save(employee);
 			return "redirect:/employees";
@@ -117,14 +132,23 @@ public class IndexController {
 	}
 
 	@RequestMapping(path = "/updateEmployee", method = RequestMethod.POST)
-	public String update(@ModelAttribute Employee employee, @RequestParam("startDateString") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date formdate, @RequestParam("superiorEmpId") String superiorEmpId) {
+	public String update(@ModelAttribute Employee employee, @RequestParam("startDateString") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date formdate, @RequestParam("depId") String departmentId, @RequestParam("superiorEmpId") String superiorEmpId) {
 		if (formdate == null) {
 			Date d = new Date();
 			employee.setStartDate(d);
 		} else {
 			employee.setStartDate(formdate);
 		}
-		employee.setChef(dao.findById(Integer.parseInt(superiorEmpId)));
+		if (superiorEmpId.equals("null")) {
+			employee.setChef(null);	
+		} else {
+			employee.setChef(dao.findById(Integer.parseInt(superiorEmpId)));
+		}
+		if (departmentId.equals("null")) {
+			employee.setDepartment(null);	
+		} else {
+			employee.setDepartment(depdao.findById(Integer.parseInt(departmentId)));
+		}
 		dao.update(employee);
 		return "redirect:/employees";
 	}
@@ -139,7 +163,9 @@ public class IndexController {
 		ModelAndView mv = new ModelAndView();
 		if (session.getAttribute("username") != null) {
 			List <Employee> managers = dao.managersList();
+			List<Department> departments = depdao.findAll();
 			mv.addObject("managers", managers);
+			mv.addObject("departments", departments);
 			mv.setViewName("addEmployee");
 			return mv;
 		} else {
