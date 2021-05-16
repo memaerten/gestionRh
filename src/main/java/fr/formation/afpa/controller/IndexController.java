@@ -1,25 +1,32 @@
 package fr.formation.afpa.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import fr.formation.afpa.config.EmployeeValidator;
 import fr.formation.afpa.dao.DepartmentDaoJpa;
-import fr.formation.afpa.dao.EmployeeDaoJpa;
 import fr.formation.afpa.domain.Department;
 import fr.formation.afpa.domain.Employee;
 import fr.formation.afpa.service.EmployeeService;
@@ -37,6 +44,15 @@ public class IndexController {
 	DepartmentDaoJpa depdao = new DepartmentDaoJpa();
 	
 	boolean isAuthenticated = false;
+	
+
+    @Autowired
+    private EmployeeValidator employeeValidator;
+
+    @InitBinder
+    protected void initBinder(final HttpServletRequest request, final ServletRequestDataBinder binder) {
+        binder.addValidators(employeeValidator);
+    }
 
 	// injecter service
 
@@ -106,8 +122,13 @@ public class IndexController {
 	}
 
 	@RequestMapping(path = "/addEmployee", method = RequestMethod.POST)
-	public String add(@ModelAttribute Employee employee, @RequestParam("startDateString") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date formdate, @RequestParam("superiorEmpId") String superiorEmpId, @RequestParam("depId") String departmentId, HttpSession session) {
+	public String add(@ModelAttribute Employee employee, @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date formdate, @RequestParam("superiorEmpId") String superiorEmpId, @RequestParam("depId") String departmentId, HttpSession session, BindingResult result) {
 		if (session.getAttribute("username") != null) {
+			employeeValidator.validate(employee, result);
+			if(result.hasErrors()) {
+				return "redirect:/addEmployee";
+			}
+			
 			if (formdate == null) {
 				Date d = new Date();
 				employee.setStartDate(d);
@@ -132,7 +153,8 @@ public class IndexController {
 	}
 
 	@RequestMapping(path = "/updateEmployee", method = RequestMethod.POST)
-	public String update(@ModelAttribute Employee employee, @RequestParam("startDateString") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date formdate, @RequestParam("depId") String departmentId, @RequestParam("superiorEmpId") String superiorEmpId) {
+	public String update(@ModelAttribute Employee employee, @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date formdate, @RequestParam("depId") String departmentId, @RequestParam("superiorEmpId") String superiorEmpId, BindingResult result) {
+		employeeValidator.validate(employee, result);
 		if (formdate == null) {
 			Date d = new Date();
 			employee.setStartDate(d);
@@ -166,6 +188,7 @@ public class IndexController {
 			List<Department> departments = depdao.findAll();
 			mv.addObject("managers", managers);
 			mv.addObject("departments", departments);
+			mv.addObject("date", new Date());
 			mv.setViewName("addEmployee");
 			return mv;
 		} else {

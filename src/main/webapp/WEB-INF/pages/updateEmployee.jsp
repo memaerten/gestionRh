@@ -17,9 +17,9 @@
 			<div class="col-auto"><label><spring:message code="global.lastname"></spring:message> :</label></div>
 			<div class="col-auto"><input type="text" name="lastName" class="form-control" value="${employee.lastName}" maxlength="20"></div><br />
 			<label><spring:message code="global.firstname"></spring:message> :</label> <input type="text" name="firstName" class="form-control" value="${employee.firstName}" maxlength="20"><br />
-			<label><spring:message code="global.startdate"></spring:message> :</label> <input type="date" name="startDateString" class="form-control" value="${employee.startDate}"><br />
+			<label><spring:message code="global.startdate"></spring:message> :</label> <input type="date" name="startDate" class="form-control" value="${employee.startDate}"><br />
 			<label><spring:message code="global.title"></spring:message> :</label> <input type="text" name="title" class="form-control" value="${employee.title}" maxlength="20"><br />
-			<label>Département :</label>  </label> <div class="form-group">
+			<label><spring:message code="global.department"></spring:message> :</label>  </label> <div class="form-group">
   <select class="form-select form-control" name="depId">
    <option value="null"><spring:message code="global.nonemanager"></spring:message></option>
   <c:forEach items="${departments}" var="department">
