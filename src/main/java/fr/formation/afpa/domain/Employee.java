@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Employee {
 	
@@ -28,6 +30,7 @@ public class Employee {
 	
 	@Column(name="start_date", nullable = false)
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date startDate;
 	
 	@Column(name="title", nullable = false, length=30)

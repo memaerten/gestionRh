@@ -9,7 +9,7 @@ import fr.formation.afpa.dao.EmployeeDaoJpa;
 import fr.formation.afpa.dao.IGenericDao;
 import fr.formation.afpa.domain.Employee;
 
-public class EmployeeService implements IEmployeeService {
+public class DepartmentService implements IEmployeeService {
 	//IGenericDao<Employee> dao;
 	EmployeeDaoJpa dao = new EmployeeDaoJpa();
 	

@@ -11,7 +11,7 @@ public interface IEmployeeDaoJpa {
 	List <Employee> findAll();
 
 	// Create
-	Integer save(Employee e);
+	void save(Employee e);
 
 	// Update
 	void update(Employee e);
