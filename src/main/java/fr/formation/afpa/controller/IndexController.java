@@ -1,7 +1,5 @@
 package fr.formation.afpa.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -11,12 +9,13 @@ import javax.persistence.Persistence;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -45,6 +44,8 @@ public class IndexController {
 	
 	boolean isAuthenticated = false;
 	
+	private static final Log log = LogFactory.getLog(IndexController.class);
+	
 
     @Autowired
     private EmployeeValidator employeeValidator;
@@ -67,6 +68,8 @@ public class IndexController {
 
 	@RequestMapping(path = "/employees", method = RequestMethod.GET)
 	public ModelAndView getEmployees(HttpSession session) {
+		log.info("aaaaaaaaa");
+		log.info(session.getServletContext().getAttribute("name"));
 		ModelAndView mv = new ModelAndView();
 		if (session.getAttribute("username") != null) {
 			List <Employee> liste = dao.findAll();
@@ -217,6 +220,8 @@ public class IndexController {
 		if (session.getAttribute("username") != null) {
 			List <Employee> liste = dao.employeesNoManager();
 			mv.addObject("liste", liste);
+			List <Employee> managers = dao.managersList();
+			mv.addObject("managers", managers);
 			mv.setViewName("parametres");
 		} else {
 			mv.setViewName("redirect:/connexion");

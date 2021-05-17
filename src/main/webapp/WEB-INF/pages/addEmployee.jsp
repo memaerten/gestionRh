@@ -18,7 +18,7 @@
 			<div class="col-auto"><label><spring:message code="global.lastname"></spring:message> :</label></div>
 			<div class="col-auto"><input type="text" name="lastName" class="form-control" maxlength="20"></div><br />
 			<label><spring:message code="global.firstname"></spring:message> :</label> <input type="text" name="firstName" class="form-control" maxlength="20"><br />
-			<form:errors path="firstName"><spring:message code="label.empty"></spring:message></form:errors>
+			<form:errors path="firstName" element="div"></form:errors>
 			<label><spring:message code="global.startdate"></spring:message> :</label> <input type="date" name="startDate" class="form-control" value="${date}"><br />
 			<label><spring:message code="global.title"></spring:message> :</label> <input type="text" name="title" class="form-control" maxlength="20"><br />
 			<label><spring:message code="global.department"></spring:message> :</label>  </label> <div class="form-group">
