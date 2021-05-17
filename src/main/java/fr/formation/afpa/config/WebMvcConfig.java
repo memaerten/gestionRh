@@ -34,7 +34,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		localInterceptor.setParamName("lang");
 
 		registry.addInterceptor(localInterceptor).addPathPatterns("/*");
-		registry.addInterceptor(new SessionInterceptor());
+		registry.addInterceptor(new SessionInterceptor()).addPathPatterns("/*");
 		registry.addInterceptor(new UserInterceptor());
 	}
 }

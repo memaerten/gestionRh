@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,8 +38,12 @@
 						href="parametres.html"><spring:message code="global.settings"></spring:message> </a></li>
 				</ul>
 				<ul class="navbar-nav me-auto mb-2 mb-md-0">
-					<li><a href="connexion" class="nav-item nav-link"><spring:message code="global.login"></spring:message> </a>
-					</li>
+				<c:choose>
+				<c:when test="${sessionScope.username != null}"><li><a href="deconnexion" class="nav-item nav-link">Déconnexion</a>
+					</li></c:when>
+				<c:when test="${sessionScope.username == null}"><li><a href="connexion" class="nav-item nav-link"><spring:message code="global.login"></spring:message></a>
+					</li></c:when>
+				</c:choose>
 					<li><a href="?lang=fr" class="nav-item nav-link">Français</a>
 					</li>
 					<li><a href="?lang=en" class="nav-item nav-link">English</a>

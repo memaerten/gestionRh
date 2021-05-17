@@ -11,9 +11,9 @@
 <div class="container-sm connexion"><h1>Connexion</h1>
 <form method="post">
 	<div class="col-sm-6">
-	<label>Nom :</label> <input type="text" name="username" class="form-control"><br />
+	<label><spring:message code="global.username"></spring:message> :</label> <input type="text" name="username" class="form-control"><br />
 
-	<label>Mot de passe :</label> <input type="password" name="password" class="form-control"><br />
+	<label><spring:message code="global.password"></spring:message> :</label> <input type="password" name="password" class="form-control"><br />
 	<input type="submit" class="btn btn-primary" />
 	</div>
 </form>
