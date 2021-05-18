@@ -68,8 +68,6 @@ public class IndexController {
 
 	@RequestMapping(path = "/employees", method = RequestMethod.GET)
 	public ModelAndView getEmployees(HttpSession session) {
-		log.info("aaaaaaaaa");
-		log.info(session.getServletContext().getAttribute("name"));
 		ModelAndView mv = new ModelAndView();
 		if (session.getAttribute("username") != null) {
 			List <Employee> liste = dao.findAll();
