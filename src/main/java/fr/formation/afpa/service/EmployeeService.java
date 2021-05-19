@@ -1,16 +1,13 @@
 package fr.formation.afpa.service;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.formation.afpa.dao.EmployeeDaoJpa;
-import fr.formation.afpa.dao.IGenericDao;
 import fr.formation.afpa.domain.Employee;
 
 public class EmployeeService implements IEmployeeService {
-	//IGenericDao<Employee> dao;
 	EmployeeDaoJpa dao = new EmployeeDaoJpa();
 	
 	@Autowired

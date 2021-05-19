@@ -2,7 +2,6 @@ package fr.formation.afpa.service;
 
 import java.util.List;
 
-import fr.formation.afpa.dao.IGenericDao;
 import fr.formation.afpa.domain.Employee;
 
 public interface IEmployeeService {
